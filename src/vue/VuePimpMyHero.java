@@ -283,7 +283,7 @@ public class VuePimpMyHero extends Vue {
             @Override
             public void handle(ActionEvent e) {
                 System.out.println("Clic sur " + cp.getId());
-                controleur.notifierSelectionColorPicker(cp);
+                controleur.notifierSelectionColorPicker(cp.getValue().toString());
                 System.out.println("La couleur c'est" + cp.getValue());
             }
         });

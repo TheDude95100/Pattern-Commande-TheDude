@@ -2,8 +2,10 @@ package controleur;
 
 import architecture.Controleur;
 import architecture.Vue;
+import controleur.commande.CommandModifierListeAnimal;
 import controleur.commande.Commande;
 import controleur.commande.CommandeChangerBackground;
+import controleur.commande.CommandeChangerTexte;
 import javafx.scene.control.ColorPicker;
 
 import java.util.ArrayList;
@@ -268,16 +270,18 @@ public class ControleurPimpMyHero extends Controleur {
 	public void notifierAjoutAnimal(double x, double y) {
 		Logger.logMsg(Logger.INFO, "notifierAjoutAnimal");
 		if (animalChoisi != null && !isSuppressionActive) {
-			String id = VuePimpMyHero.getInstance().ajouterAnimal(x, y, animalChoisi);
-			listeAnimalActuel.add(new Animal(animalChoisi, x, y, id));
-			Hero.getInstance().setAnimals(listeAnimalActuel);
+			CommandModifierListeAnimal commande = new CommandModifierListeAnimal(animalChoisi,x,y, this);
+			commande.executer();
+			historique.add(commande);
+
 		}
 	}
     
 	public void notifierSelectionColorPicker(ColorPicker cp) {
 		Logger.logMsg(Logger.INFO, "notifierSelectionColorPicker");
-		VuePimpMyHero.getInstance().changerCouleurLabel(cp.getValue());
-		Hero.getInstance().setCouleurNom(cp.getValue());
+		Commande commande = new CommandeChangerTexte(cp.getValue());
+		commande.executer();
+		historique.add(commande);
 	}
 
 	public void notifierChangementTitre(String text) {
@@ -319,4 +323,16 @@ public class ControleurPimpMyHero extends Controleur {
 
 		Hero.getInstance().enleverAssetActuel(Assets.ASSETS.valueOf(idAsset.toUpperCase()));
 	}
+	public void ajouterAnimal(Animal animal) {
+		listeAnimalActuel.add(animal);
+	}
+
+	public List<Animal> getListeAnimalActuel() {
+		return listeAnimalActuel;
+	}
+
+	public void setListeAnimalActuel(List<Animal> listeAnimalActuel) {
+		this.listeAnimalActuel = listeAnimalActuel;
+	}
+	
 }

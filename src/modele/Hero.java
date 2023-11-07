@@ -128,7 +128,7 @@ public class Hero implements Exportable{
 		String xml = "";
 		if(label != null)xml+="<label><titre>"+ label +"</titre>";
 		if(couleurNom != null)xml+="<couleurNom>"+couleurNom.toString()+"</couleurNom></label>";
-		if(couleurNom == null)xml+="</label>";
+		if(couleurNom == null && label!= null )xml+="</label>";
 		if(casqueActuel != null)xml+= "<casque>"+casqueActuel.toString()+"</casque>";
 		if(armureActuelle != null)xml+="<armure>"+armureActuelle.toString()+"</armure>";
 		if(capeActuelle != null)xml+="<cape>"+capeActuelle.toString()+"</cape>";
