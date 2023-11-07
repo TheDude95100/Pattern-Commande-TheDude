@@ -2,10 +2,13 @@ package controleur;
 
 import architecture.Controleur;
 import architecture.Vue;
+import controleur.commande.Commande;
+import controleur.commande.CommandeChangerBackground;
 import javafx.scene.control.ColorPicker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.Timer;
 
 import com.sun.media.jfxmedia.logging.Logger;
@@ -118,7 +121,8 @@ public class ControleurPimpMyHero extends Controleur {
 	public double getAssetSize(Assets.ASSETS asset) {
 		return Assets.getAssetSize(asset);
 	}
-
+	protected Stack<Commande> historique = new Stack<Commande>();
+	
     public void notifierSelectionBouton(int idBouton) {
     	//List<String> boutons = VuePimpMyHero.getInstance().getBoutons();
     	Logger.logMsg(Logger.INFO, "ControleurPimpMyHero.notifierBouton() - " + idBouton);
@@ -163,6 +167,7 @@ public class ControleurPimpMyHero extends Controleur {
     		break;
     	case 8 :
     		//#bouton-annuler
+    		historique.pop().annuler();
     		break;
     	case 9 :
     		//#bouton-choix-1
@@ -231,8 +236,9 @@ public class ControleurPimpMyHero extends Controleur {
     		break;
     		
     	case BACKGROUND:
-    		Hero.getInstance().setBackgroundActuel(BACKGROUND.valueOf("BACKGROUND" + id));
-    		vue.VuePimpMyHero.getInstance().changerAsset(itemChoisi, id);
+    		CommandeChangerBackground commande = new CommandeChangerBackground(id, itemChoisi);
+    		commande.executer();
+    		this.historique.add(commande);
     		System.out.println("Hero.getInstance().getBackgroundActuel() : " + Hero.getInstance().getBackgroundActuel().toString());
     		break;
     		

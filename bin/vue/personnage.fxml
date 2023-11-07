@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="1263.0" style="-fx-background-color: #929292;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="1263.0" style="-fx-background-color: #929292;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="680.0" prefWidth="82.0" style="-fx-background-color: #282828;">
          <opaqueInsets>
@@ -35,8 +35,12 @@
             <Pane prefHeight="230.0" prefWidth="82.0">
                <children>
                   <Line endX="79.99998474121094" endY="228.79998779296875" startX="-1.220703143189894E-5" startY="228.79998779296875" stroke="#b4b4b4" style="-fx-opacity: 25%;" />
-                  <Button id="bouton-refaire" layoutX="-4.0" mnemonicParsing="false" prefHeight="229.0" prefWidth="89.0" style="-fx-opacity: 0%;" text="Button" />
-                  <Label layoutX="20.0" layoutY="85.0" prefHeight="38.0" prefWidth="39.0" text="A Venir" textFill="RED" />
+                  <ImageView fitHeight="98.0" fitWidth="98.0" layoutX="-8.0" layoutY="65.0" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icones/supprimer.png" />
+                     </image>
+                  </ImageView>
+                  <Button id="bouton-supprimer" layoutX="-4.0" mnemonicParsing="false" prefHeight="229.0" prefWidth="89.0" style="-fx-opacity: 0%;" text="Button" />
                </children>
             </Pane>
             <Pane prefHeight="236.0" prefWidth="82.0">
