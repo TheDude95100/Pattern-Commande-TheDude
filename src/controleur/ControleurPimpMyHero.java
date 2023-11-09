@@ -270,7 +270,7 @@ public class ControleurPimpMyHero extends Controleur {
 	public void notifierAjoutAnimal(double x, double y) {
 		Logger.logMsg(Logger.INFO, "notifierAjoutAnimal");
 		if (animalChoisi != null && !isSuppressionActive) {
-			CommandModifierListeAnimal commande = new CommandModifierListeAnimal(animalChoisi,x,y, this);
+			CommandModifierListeAnimal commande = new CommandModifierListeAnimal(animalChoisi,x,y);
 			commande.executer();
 			historique.add(commande);
 

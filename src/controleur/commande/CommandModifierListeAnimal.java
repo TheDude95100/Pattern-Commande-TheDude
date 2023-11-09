@@ -1,5 +1,6 @@
 package controleur.commande;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controleur.ControleurPimpMyHero;
@@ -13,28 +14,32 @@ public class CommandModifierListeAnimal extends Commande{
 	ANIMAL animalChoisi;
 	double x,y;
 	String id;
-	ControleurPimpMyHero controlleur;
+	List<Animal>listeActuel;
 
-	public CommandModifierListeAnimal(ANIMAL animalChoisi, double x, double y, ControleurPimpMyHero contoleur) {
+	public CommandModifierListeAnimal(ANIMAL animalChoisi, double x, double y) {
 		// TODO Auto-generated constructor stub
 		this.animalChoisi = animalChoisi;
 		this.x = x;
 		this.y = y;
-		this.controlleur = contoleur;
+		this.listeActuel = new ArrayList<Animal>();
 	}
 	@Override
 	public void executer() {
 		// TODO Auto-generated method stub
 		this.id = VuePimpMyHero.getInstance().ajouterAnimal(x, y, animalChoisi);
 		Animal animal = new Animal(animalChoisi, x, y, id);
-		this.controlleur.ajouterAnimal(animal);
-		Hero.getInstance().setAnimals(controlleur.getListeAnimalActuel());
+		if (Hero.getInstance().getAnimals()!=null) this.listeActuel = Hero.getInstance().getAnimals();
+		listeActuel.add(animal);
+		Hero.getInstance().setAnimals(listeActuel);
 	}
 
 	@Override
 	public void annuler() {
 		// TODO Auto-generated method stub
-		controlleur.notifierSuppressionAsset(id);
+		VuePimpMyHero.getInstance().supprimerAsset(listeActuel.get(listeActuel.size()-1).getId());
+		listeActuel.remove(listeActuel.size()-1);
+		Hero.getInstance().setAnimals(listeActuel);
+		
 	}
 
 }
